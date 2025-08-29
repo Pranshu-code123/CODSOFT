@@ -1,0 +1,57 @@
+from tkinter import *
+
+root = Tk()
+root.title("Calculator")
+root.geometry("400x500")
+root.configure(bg="lightgray")
+
+equation = ""   # to store the text
+
+def press(num):
+    global equation
+    equation = equation + str(num)
+    label.config(text=equation)
+
+def clear():
+    global equation
+    equation = ""
+    label.config(text="")
+
+def equal():
+    global equation
+    try:
+        result = eval(equation)
+        label.config(text=result)
+        equation = str(result)
+    except:
+        label.config(text="Error")
+        equation = ""
+
+# display
+label = Label(root, text="", width=20, height=2, font=("Arial", 24), bg="white", anchor="e")
+label.pack(pady=20)
+
+# buttons row by row
+Button(root, text="C", width=5, height=2, font=("Arial", 18), command=clear).place(x=20,y=100)
+Button(root, text="/", width=5, height=2, font=("Arial", 18), command=lambda: press("/")).place(x=110,y=100)
+Button(root, text="*", width=5, height=2, font=("Arial", 18), command=lambda: press("*")).place(x=200,y=100)
+Button(root, text="-", width=5, height=2, font=("Arial", 18), command=lambda: press("-")).place(x=290,y=100)
+
+Button(root, text="7", width=5, height=2, font=("Arial", 18), command=lambda: press("7")).place(x=20,y=180)
+Button(root, text="8", width=5, height=2, font=("Arial", 18), command=lambda: press("8")).place(x=110,y=180)
+Button(root, text="9", width=5, height=2, font=("Arial", 18), command=lambda: press("9")).place(x=200,y=180)
+Button(root, text="+", width=5, height=2, font=("Arial", 18), command=lambda: press("+")).place(x=290,y=180)
+
+Button(root, text="4", width=5, height=2, font=("Arial", 18), command=lambda: press("4")).place(x=20,y=260)
+Button(root, text="5", width=5, height=2, font=("Arial", 18), command=lambda: press("5")).place(x=110,y=260)
+Button(root, text="6", width=5, height=2, font=("Arial", 18), command=lambda: press("6")).place(x=200,y=260)
+Button(root, text="=", width=5, height=5, font=("Arial", 18), bg="orange", command=equal).place(x=290,y=260)
+
+Button(root, text="1", width=5, height=2, font=("Arial", 18), command=lambda: press("1")).place(x=20,y=340)
+Button(root, text="2", width=5, height=2, font=("Arial", 18), command=lambda: press("2")).place(x=110,y=340)
+Button(root, text="3", width=5, height=2, font=("Arial", 18), command=lambda: press("3")).place(x=200,y=340)
+
+Button(root, text="0", width=11, height=2, font=("Arial", 18), command=lambda: press("0")).place(x=20,y=420)
+Button(root, text=".", width=5, height=2, font=("Arial", 18), command=lambda: press(".")).place(x=200,y=420)
+
+root.mainloop()
